@@ -14,10 +14,12 @@
 	<name>PizzaApp</name>
 	<description>Demo project for Spring Boot</description>
 
+	<!--
 	<properties>
 		<java.version>11</java.version>
 		<vaadin.version>14.1.19</vaadin.version>
 	</properties>
+	-->
 
 	<dependencies>
 		<dependency>
@@ -28,10 +30,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 		</dependency>
+		-->
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -51,6 +55,7 @@
 		</dependency>
 	</dependencies>
 
+	<!--
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -62,12 +67,21 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	-->
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>10</source>
+					<target>10</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
