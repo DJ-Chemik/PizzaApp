@@ -1,6 +1,6 @@
 package pl.chemik.PizzaApp.objects.ingredients;
 
-import pl.chemik.PizzaApp.objects.ingredients.categories.CategoryOfIngredient;
+import pl.chemik.PizzaApp.objects.categoriesOfIngredients.CategoryOfIngredient;
 
 public abstract class Ingredient {
 
@@ -29,5 +29,10 @@ public abstract class Ingredient {
 
     public void setCategory(CategoryOfIngredient category) {
         this.category = category;
+    }
+
+
+    public String getClassName() {
+        return this.getClass().getSimpleName();
     }
 }
