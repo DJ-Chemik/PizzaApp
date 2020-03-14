@@ -6,7 +6,7 @@ import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 import pl.chemik.PizzaApp.objects.ingredients.cheeses.AzureCheese;
 import pl.chemik.PizzaApp.objects.ingredients.cheeses.Cheese;
 import pl.chemik.PizzaApp.objects.ingredients.cheeses.ExtraCheese;
-import pl.chemik.PizzaApp.objects.ingredients.sauces.Camembert;
+import pl.chemik.PizzaApp.objects.ingredients.cheeses.Camembert;
 import pl.chemik.PizzaApp.objects.ingredients.sauces.TomatoSauce;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
 

@@ -1,4 +1,4 @@
-package pl.chemik.PizzaApp.objects.ingredients.sauces;
+package pl.chemik.PizzaApp.objects.ingredients.cheeses;
 
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
