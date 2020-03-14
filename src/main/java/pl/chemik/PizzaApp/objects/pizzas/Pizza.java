@@ -2,15 +2,16 @@ package pl.chemik.PizzaApp.objects.pizzas;
 
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Pizza {
 
     private int numberInMenu;
     private String name;
     private List<Ingredient> ingredients;
-    private int size;
-    private int price;
+    private Map<Integer, Float> tableOfCostsAndSizes;
 
 
     public Pizza(int numberInMenu, String name, List<Ingredient> ingredients) {
@@ -19,12 +20,37 @@ public class Pizza {
         this.ingredients = ingredients;
     }
 
-    public Pizza(int numberInMenu, String name, List<Ingredient> ingredients, int size, int price) {
+    public Pizza(int numberInMenu, String name, List<Ingredient> ingredients, Map<Integer, Float> tableOfCostsAndSizes) {
         this.numberInMenu = numberInMenu;
         this.name = name;
         this.ingredients = ingredients;
-        this.size = size;
-        this.price = price;
+        this.tableOfCostsAndSizes = tableOfCostsAndSizes;
+    }
+
+    /**
+     *
+     * @param numberInMenu
+     * @param name
+     * @param ingredients
+     * @param costs for 4 sizes of pizza: 23cm, 30cm, 40cm and 50cm
+     * @throws WrongCostsOfPizzaSizesException if list of costs size is different than 4;
+     */
+    public Pizza(int numberInMenu, String name, List<Ingredient> ingredients, List<Float> costs) throws WrongCostsOfPizzaSizesException {
+        if (costs.size()!=4){
+            throw new WrongCostsOfPizzaSizesException();
+        }else{
+            this.numberInMenu = numberInMenu;
+            this.name = name;
+            this.ingredients = ingredients;
+            List<Integer> sizes = new ArrayList<>();
+            sizes.add(23);
+            sizes.add(30);
+            sizes.add(40);
+            sizes.add(50);
+            for (int i = 0; i < sizes.size(); i++) {
+                tableOfCostsAndSizes.put(sizes.get(i), costs.get(i));
+            }
+        }
     }
 
     public int getNumberInMenu() {
@@ -51,19 +77,31 @@ public class Pizza {
         this.ingredients = ingredients;
     }
 
-    public int getSize() {
-        return size;
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public Map<Integer, Float> getTableOfCostsAndSizes() {
+        return tableOfCostsAndSizes;
     }
 
-    public int getPrice() {
-        return price;
+    public void setTableOfCostsAndSizes(Map<Integer, Float> tableOfCostsAndSizes) {
+        this.tableOfCostsAndSizes = tableOfCostsAndSizes;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void addNewSizeOfPizza(int size, float cost){
+        tableOfCostsAndSizes.put(size,cost);
     }
+
+    public boolean deleteSizeOfPizza(int size){
+        Float removeElement =  tableOfCostsAndSizes.remove(size);
+        if (removeElement!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 }
