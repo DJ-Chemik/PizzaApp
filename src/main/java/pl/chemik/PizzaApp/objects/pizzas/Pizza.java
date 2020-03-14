@@ -13,8 +13,10 @@ public class Pizza {
     private List<Ingredient> ingredients;
     private Map<Integer, Float> tableOfCostsAndSizes;
 
+    protected Pizza() {
+    }
 
-    public Pizza(int numberInMenu, String name, List<Ingredient> ingredients) {
+    protected Pizza(int numberInMenu, String name, List<Ingredient> ingredients) {
         this.numberInMenu = numberInMenu;
         this.name = name;
         this.ingredients = ingredients;

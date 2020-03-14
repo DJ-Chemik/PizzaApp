@@ -1,8 +1,8 @@
-package pl.chemik.PizzaApp.objects.ingredients.vegetables;
+package pl.chemik.PizzaApp.objects.ingredients.sauces;
 
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 @Component
-public class Corn extends Ingredient {
+public class CarrySauce extends Ingredient {
 }

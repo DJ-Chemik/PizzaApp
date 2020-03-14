@@ -1,4 +1,8 @@
 package pl.chemik.PizzaApp.objects.ingredients.vegetables;
 
-public class Cucumber {
+import org.springframework.stereotype.Component;
+import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
+
+@Component
+public class Cucumber extends Ingredient {
 }

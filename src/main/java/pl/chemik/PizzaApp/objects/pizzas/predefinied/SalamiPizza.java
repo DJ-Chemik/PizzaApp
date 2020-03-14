@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 import pl.chemik.PizzaApp.objects.ingredients.cheeses.Cheese;
-import pl.chemik.PizzaApp.objects.ingredients.meat.Ham;
-import pl.chemik.PizzaApp.objects.ingredients.sauces.Camembert;
+import pl.chemik.PizzaApp.objects.ingredients.meat.Salami;
 import pl.chemik.PizzaApp.objects.ingredients.sauces.TomatoSauce;
-import pl.chemik.PizzaApp.objects.ingredients.vegetables.Broccoli;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
 
 import java.util.ArrayList;
@@ -16,24 +14,22 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class Brocoli extends Pizza {
+public class SalamiPizza extends Pizza {
 
     @Autowired
-    public Brocoli(TomatoSauce tomatoSauce, Cheese cheese, Ham ham, Broccoli broccoli, Camembert camembert) {
+    public SalamiPizza(TomatoSauce tomatoSauce, Cheese cheese, Salami salami) {
         super();
-        int numberInMenu = 26;
-        String name = "Broccoli";
+        int numberInMenu = 4;
+        String name = "SalamiPizza";
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(tomatoSauce);
         ingredients.add(cheese);
-        ingredients.add(ham);
-        ingredients.add(broccoli);
-        ingredients.add(camembert);
+        ingredients.add(salami);
         Map<Integer, Float> tableOfCostsAndSizes = new HashMap<>();
-        tableOfCostsAndSizes.put(23, 19f);
-        tableOfCostsAndSizes.put(30, 29f);
-        tableOfCostsAndSizes.put(40, 38f);
-        tableOfCostsAndSizes.put(50, 49f);
+        tableOfCostsAndSizes.put(23, 14f);
+        tableOfCostsAndSizes.put(30, 21f);
+        tableOfCostsAndSizes.put(40, 29f);
+        tableOfCostsAndSizes.put(50, 38f);
         this.setNumberInMenu(numberInMenu);
         this.setName(name);
         this.setIngredients(ingredients);
