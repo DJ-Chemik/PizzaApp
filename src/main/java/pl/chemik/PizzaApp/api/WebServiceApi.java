@@ -22,7 +22,7 @@ public class WebServiceApi {
         pizzzas = marioPizzaPlaceManager.getMarioPizzas();
     }
 
-    @GetMapping
+    @GetMapping("/hello")
     public String mainWebsite(){
         return "Hello in web app with the best pizzas :)";
     }
