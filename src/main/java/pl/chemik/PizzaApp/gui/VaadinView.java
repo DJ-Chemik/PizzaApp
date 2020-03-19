@@ -1,32 +1,25 @@
 package pl.chemik.PizzaApp.gui;
 
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.chemik.PizzaApp.api.WebServiceApi;
 
 @Route("")
-public class VaadinView extends VerticalLayout {
+public class VaadinView extends HorizontalLayout {
 
     private WebServiceApi webServiceApi;
+    private IngredientsLayout ingredientsLayout;
+    private PizzasLayout pizzasLayout;
 
     @Autowired
-    public void setWebServiceApi(WebServiceApi webServiceApi) {
-        this.webServiceApi = webServiceApi;
-    }
+    public VaadinView(WebServiceApi webServiceApi) {
+        this.webServiceApi=webServiceApi;
+        this.ingredientsLayout= new IngredientsLayout();
+        this.pizzasLayout = new PizzasLayout(webServiceApi);
 
-    public VaadinView() {
-        Button button = new Button("Pizza");
-
-
-        button.addClickListener(buttonClickEvent -> {
-            //webServiceApi.getNameOfPizzas();
-            add(new Image("https://media.giphy.com/media/gd09Y2Ptu7gsiPVUrv/giphy.gif", "KEVIN"));
-        });
-
-        add(button);
-
+        add(pizzasLayout);
+        add(ingredientsLayout);
     }
 }
