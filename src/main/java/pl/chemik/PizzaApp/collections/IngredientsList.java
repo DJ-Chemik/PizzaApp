@@ -1,4 +1,4 @@
-package pl.chemik.PizzaApp.objects.collections;
+package pl.chemik.PizzaApp.collections;
 
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
@@ -23,7 +23,7 @@ public class IngredientsList {
     }
 
     public void addAll(Collection<Ingredient> ingredients){
-        ingredients.addAll(ingredients);
+        this.ingredients.addAll(ingredients);
     }
 
     public Ingredient get(int id){
@@ -38,11 +38,17 @@ public class IngredientsList {
         ingredients.remove(index);
     }
 
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     public String toString(){
         String name = "";
+        StringBuffer stringBuffer = new StringBuffer(name);
         for (Ingredient i: ingredients){
-            name.concat(" " + i.getClassName());
+            stringBuffer.append(i.getClassName());
+            stringBuffer.append(", ");
         }
-        return name;
+        return stringBuffer.toString();
     }
 }

@@ -49,6 +49,8 @@ public class PizzasLayout extends VerticalLayout {
                 .setHeader("Nazwa")
                 .setWidth("3em")
                .setResizable(true);
+        grid.addColumn(Pizza::getIngredients)
+                .setHeader("Składniki");
 
     }
 }

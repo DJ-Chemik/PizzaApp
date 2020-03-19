@@ -1,6 +1,6 @@
 package pl.chemik.PizzaApp.objects.pizzas;
 
-import com.vaadin.flow.component.html.Image;
+import pl.chemik.PizzaApp.collections.IngredientsList;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Pizza {
 
     private int numberInMenu;
     private String name;
-    private List<Ingredient> ingredients;
+    private IngredientsList ingredients;
     private Map<Integer, Float> tableOfCostsAndSizes;
 
     protected Pizza() {
@@ -20,13 +20,15 @@ public class Pizza {
     protected Pizza(int numberInMenu, String name, List<Ingredient> ingredients) {
         this.numberInMenu = numberInMenu;
         this.name = name;
-        this.ingredients = ingredients;
+        this.ingredients = new IngredientsList();
+        this.ingredients.addAll(ingredients);
     }
 
     public Pizza(int numberInMenu, String name, List<Ingredient> ingredients, Map<Integer, Float> tableOfCostsAndSizes) {
         this.numberInMenu = numberInMenu;
         this.name = name;
-        this.ingredients = ingredients;
+        this.ingredients = new IngredientsList();
+        this.ingredients.addAll(ingredients);
         this.tableOfCostsAndSizes = tableOfCostsAndSizes;
     }
 
@@ -44,7 +46,8 @@ public class Pizza {
         }else{
             this.numberInMenu = numberInMenu;
             this.name = name;
-            this.ingredients = ingredients;
+            this.ingredients = new IngredientsList();
+            this.ingredients.addAll(ingredients);
             List<Integer> sizes = new ArrayList<>();
             sizes.add(23);
             sizes.add(30);
@@ -72,12 +75,17 @@ public class Pizza {
         this.name = name;
     }
 
-    public List<Ingredient> getIngredients() {
+    public IngredientsList getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(IngredientsList ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = new IngredientsList();
+        this.ingredients.addAll(ingredients);
     }
 
     public void addIngredient(Ingredient ingredient) {

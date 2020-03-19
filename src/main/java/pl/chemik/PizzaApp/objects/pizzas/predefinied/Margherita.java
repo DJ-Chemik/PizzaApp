@@ -3,7 +3,6 @@ package pl.chemik.PizzaApp.objects.pizzas.predefinied;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
-import pl.chemik.PizzaApp.objects.ingredients.cheeses.Cheese;
 import pl.chemik.PizzaApp.objects.ingredients.sauces.TomatoSauce;
 import pl.chemik.PizzaApp.objects.ingredients.vegetables.Onion;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
