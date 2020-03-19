@@ -1,5 +1,6 @@
 package pl.chemik.PizzaApp.objects.pizzas;
 
+import com.vaadin.flow.component.html.Image;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 import java.util.ArrayList;
@@ -103,7 +104,6 @@ public class Pizza {
             return false;
         }
     }
-
 
 
 }

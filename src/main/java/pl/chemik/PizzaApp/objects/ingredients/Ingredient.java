@@ -31,7 +31,6 @@ public abstract class Ingredient {
         this.category = category;
     }
 
-
     public String getClassName() {
         return this.getClass().getSimpleName();
     }
