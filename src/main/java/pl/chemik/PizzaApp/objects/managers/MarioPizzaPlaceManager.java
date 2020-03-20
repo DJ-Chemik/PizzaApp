@@ -12,8 +12,9 @@ import java.util.List;
 public class MarioPizzaPlaceManager {
 
     private List<Pizza> marioPizzas;
+    IngredientsManager ingredientsManager;
 
-    public MarioPizzaPlaceManager(Margherita margherita, Funghi funghi, Vesuvio vesuvio, SalamiPizza salami,
+    public MarioPizzaPlaceManager(IngredientsManager ingredientsManager, Margherita margherita, Funghi funghi, Vesuvio vesuvio, SalamiPizza salami,
                                   Capriciosa capriciosa, Hawajska hawajska, Toscana toscana,
                                   Tono tono, Pepperone pepperone, Sandra sandra, Pescatore pescatore,
                                   Bolonia bolonia, Milano milano, Vegetariana vegetariana, Rzeznicka rzeznicka,
@@ -28,6 +29,7 @@ public class MarioPizzaPlaceManager {
                                   PizzaBamberska pizzaBamberska, ZielonyOgród zielonyOgród, Chłopska chłopska,
                                   Poznańska poznańska) {
 
+        this.ingredientsManager=ingredientsManager;
         marioPizzas = new ArrayList<>();
         marioPizzas.add(margherita);
         marioPizzas.add(funghi);
@@ -84,6 +86,10 @@ public class MarioPizzaPlaceManager {
         marioPizzas.add(zielonyOgród);
         marioPizzas.add(chłopska);
         marioPizzas.add(poznańska);
+    }
+
+    public IngredientsManager getIngredients() {
+        return ingredientsManager;
     }
 
     public List<Pizza> getMarioPizzas() {
