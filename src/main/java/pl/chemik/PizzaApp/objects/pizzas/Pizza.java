@@ -4,9 +4,7 @@ import pl.chemik.PizzaApp.collections.IngredientsList;
 import pl.chemik.PizzaApp.collections.TableOfCostsAndSizes;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Pizza {
 
@@ -59,6 +57,21 @@ public class Pizza {
                 tableOfCostsAndSizes.put(sizes.get(i), costs.get(i));
             }
         }
+    }
+
+    public List<Integer> getSizesOfPizza(){
+        List<Integer> list = new ArrayList<>(tableOfCostsAndSizes.keySet());
+        Collections.sort(list);
+        return list;
+    }
+
+    public List<Integer> getStandardSizesOfPizza(){
+        List<Integer> list = new ArrayList<>();
+        list.add(23);
+        list.add(30);
+        list.add(40);
+        list.add(50);
+        return list;
     }
 
     public int getNumberInMenu() {

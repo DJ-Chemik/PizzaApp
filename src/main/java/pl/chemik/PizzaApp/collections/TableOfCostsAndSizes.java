@@ -1,7 +1,5 @@
 package pl.chemik.PizzaApp.collections;
 
-import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
-
 import java.util.*;
 
 public class TableOfCostsAndSizes {
@@ -22,6 +20,10 @@ public class TableOfCostsAndSizes {
 
     public float remove(Integer size){
         return tableOfCostsAndSizes.remove(size);
+    }
+
+    public Set<Integer> keySet(){
+        return tableOfCostsAndSizes.keySet();
     }
 
     public String toString(){
