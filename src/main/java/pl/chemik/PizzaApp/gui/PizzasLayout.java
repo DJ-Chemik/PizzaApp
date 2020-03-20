@@ -5,34 +5,33 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.chemik.PizzaApp.api.WebServiceApi;
+import pl.chemik.PizzaApp.gui.controllers.PizzaLayoutController;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
 
-import java.util.List;
 
 public class PizzasLayout extends VerticalLayout {
 
-    private WebServiceApi webServiceApi;
-    private List<Integer> listOfSizes;
-    private int actualNumberOfSize;
-    private int numberOfPeople;
+    private PizzaLayoutController controller;
     private Label labelTotalCostForPerson;
     private Grid<Pizza> grid;
 
-    public PizzasLayout(WebServiceApi webServiceApi) {
-        this.webServiceApi = webServiceApi;
-        listOfSizes = webServiceApi.getOnePizzaById(1).getSizesOfPizza();
-        actualNumberOfSize = 0;
-        numberOfPeople=1;
 
-        grid = addGrid(webServiceApi);
+    @Autowired
+    public PizzasLayout(PizzaLayoutController pizzaLayoutController) {
+        this.controller = pizzaLayoutController;
+
+        grid = addGrid();
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         Label labelPizzasCount = new Label("Ilość wybranych pizz: 0");
-        Label labelPeopleCount = new Label("Ilość osób: " + numberOfPeople);
+        Label labelPeopleCount = new Label("Ilość osób: " + controller.getNumberOfPeople());
         Button buttonPeopleCountMinus = new Button("-");
         Button buttonPeopleCountPlus = new Button("+");
-        Button buttonPizzaSize = new Button("Rozmiar pizzy: " +  listOfSizes.get(actualNumberOfSize) + "cm");
+        Button buttonPizzaSize = new Button("Rozmiar pizzy: " + controller.getActualSizeOfPizza() + "cm");
         labelTotalCostForPerson = new Label();
         labelTotalCostForPerson.setVisible(false);
 
@@ -42,62 +41,43 @@ public class PizzasLayout extends VerticalLayout {
 
         grid.addSelectionListener(e -> {
             int numberOfSelectedItems = grid.getSelectionModel().getSelectedItems().size();
-            if (numberOfSelectedItems!=0){
+            if (numberOfSelectedItems != 0) {
                 labelTotalCostForPerson.setVisible(true);
                 updateResultCost();
-            }else{
+            } else {
                 labelTotalCostForPerson.setVisible(false);
             }
             labelPizzasCount.setText("Ilość wybranych pizz: " + numberOfSelectedItems);
         });
 
-        buttonPeopleCountPlus.addClickListener(e->{
-            numberOfPeople++;
+        buttonPeopleCountPlus.addClickListener(e -> {
+            controller.incrementNumberOfPeople();
             updateResultCost();
-            labelPeopleCount.setText("Ilość osób: " + numberOfPeople);
+            labelPeopleCount.setText("Ilość osób: " + controller.getNumberOfPeople());
         });
 
-        buttonPeopleCountMinus.addClickListener(e->{
-           numberOfPeople--;
-           updateResultCost();
-            labelPeopleCount.setText("Ilość osób: " + numberOfPeople);
+        buttonPeopleCountMinus.addClickListener(e -> {
+            controller.decrementNumberOfPeople();
+            updateResultCost();
+            labelPeopleCount.setText("Ilość osób: " + controller.getNumberOfPeople());
         });
 
-        buttonPizzaSize.addClickListener(e->{
-            incrementSizeOfPizza();
-           buttonPizzaSize.setText("Rozmiar pizzy: " + listOfSizes.get(actualNumberOfSize) + "cm");
+        buttonPizzaSize.addClickListener(e -> {
+            controller.nextSizeOfPizza();
+            buttonPizzaSize.setText("Rozmiar pizzy: " + controller.getActualSizeOfPizza() + "cm");
             updateResultCost();
         });
 
     }
 
-    private void updateResultCost(){
-        labelTotalCostForPerson.setText("Koszt na osobę: " + calculateCostForPerson(grid,
-                grid.getSelectionModel().getSelectedItems().size()));
+    private void updateResultCost() {
+        labelTotalCostForPerson.setText("Koszt na osobę: " + controller.calculateCostForPerson(grid));
     }
 
-    private float calculateCostForPerson(Grid grid, int numberOfSelectedItems){
-        float totalCost = 0f;
-        for (Object o: grid.getSelectionModel().getSelectedItems()) {
-            totalCost+= ((Pizza)o).getTableOfCostsAndSizes().get(listOfSizes.get(actualNumberOfSize));
-        }
-        totalCost/=numberOfSelectedItems;
-        totalCost/=numberOfPeople;
-        return totalCost;
-    }
-
-    private void incrementSizeOfPizza(){
-        if (actualNumberOfSize ==listOfSizes.size()-1){
-            actualNumberOfSize=0;
-        }else{
-            actualNumberOfSize++;
-        }
-    }
-
-    private Grid<Pizza> addGrid(WebServiceApi webServiceApi) {
+    private Grid<Pizza> addGrid() {
         Grid<Pizza> grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.MULTI);
-        grid.setItems(webServiceApi.getPizzas());
+        grid.setItems(controller.getPizzas());
         addColumnsToGrid(grid);
         add(grid);
         return grid;
