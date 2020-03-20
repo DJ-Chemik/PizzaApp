@@ -4,7 +4,6 @@ import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class IngredientsList {
 

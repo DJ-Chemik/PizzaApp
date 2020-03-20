@@ -1,6 +1,7 @@
 package pl.chemik.PizzaApp.objects.pizzas;
 
 import pl.chemik.PizzaApp.collections.IngredientsList;
+import pl.chemik.PizzaApp.collections.TableOfCostsAndSizes;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class Pizza {
     private int numberInMenu;
     private String name;
     private IngredientsList ingredients;
-    private Map<Integer, Float> tableOfCostsAndSizes;
+//    private Map<Integer, Float> tableOfCostsAndSizes;
+    private TableOfCostsAndSizes tableOfCostsAndSizes;
 
     protected Pizza() {
     }
@@ -29,7 +31,7 @@ public class Pizza {
         this.name = name;
         this.ingredients = new IngredientsList();
         this.ingredients.addAll(ingredients);
-        this.tableOfCostsAndSizes = tableOfCostsAndSizes;
+        this.tableOfCostsAndSizes = new TableOfCostsAndSizes(tableOfCostsAndSizes);
     }
 
     /**
@@ -92,12 +94,12 @@ public class Pizza {
         this.ingredients.add(ingredient);
     }
 
-    public Map<Integer, Float> getTableOfCostsAndSizes() {
+    public TableOfCostsAndSizes getTableOfCostsAndSizes() {
         return tableOfCostsAndSizes;
     }
 
     public void setTableOfCostsAndSizes(Map<Integer, Float> tableOfCostsAndSizes) {
-        this.tableOfCostsAndSizes = tableOfCostsAndSizes;
+        this.tableOfCostsAndSizes = new TableOfCostsAndSizes(tableOfCostsAndSizes);
     }
 
     public void addNewSizeOfPizza(int size, float cost){

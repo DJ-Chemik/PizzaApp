@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pl.chemik.PizzaApp.api.WebServiceApi;
 
 @Route("")
-public class VaadinView extends HorizontalLayout {
+public class VaadinView extends VerticalLayout {
 
     private WebServiceApi webServiceApi;
     private IngredientsLayout ingredientsLayout;
