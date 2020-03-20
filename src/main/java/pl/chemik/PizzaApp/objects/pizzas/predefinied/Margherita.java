@@ -3,6 +3,7 @@ package pl.chemik.PizzaApp.objects.pizzas.predefinied;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
+import pl.chemik.PizzaApp.objects.ingredients.cheeses.Cheese;
 import pl.chemik.PizzaApp.objects.ingredients.sauces.TomatoSauce;
 import pl.chemik.PizzaApp.objects.ingredients.vegetables.Onion;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
@@ -16,13 +17,13 @@ import java.util.Map;
 public class Margherita extends Pizza {
 
     @Autowired
-    public Margherita(TomatoSauce tomatoSauce, Onion onion) {
+    public Margherita(TomatoSauce tomatoSauce, Cheese cheese) {
         super();
         int numberInMenu = 1;
         String name = "Margherita";
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(tomatoSauce);
-        ingredients.add(onion);
+        ingredients.add(cheese);
         Map<Integer, Float> tableOfCostsAndSizes = new HashMap<>();
         tableOfCostsAndSizes.put(23, 11f);
         tableOfCostsAndSizes.put(30, 18f);

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 import pl.chemik.PizzaApp.objects.ingredients.cheeses.Cheese;
 import pl.chemik.PizzaApp.objects.ingredients.meat.Salami;
-import pl.chemik.PizzaApp.objects.ingredients.meat.SmokedCheese;
+import pl.chemik.PizzaApp.objects.ingredients.cheeses.SmokedCheese;
 import pl.chemik.PizzaApp.objects.ingredients.sauces.TomatoSauce;
 import pl.chemik.PizzaApp.objects.ingredients.vegetables.Onion;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;

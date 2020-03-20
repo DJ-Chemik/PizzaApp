@@ -1,18 +1,18 @@
-package pl.chemik.PizzaApp.objects.ingredients.sauces;
+package pl.chemik.PizzaApp.objects.ingredients.cheeses;
 
 import org.springframework.stereotype.Component;
 import pl.chemik.PizzaApp.objects.ingredients.CategoryOfIngredient;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 
 @Component
-public class CreamSauce extends Ingredient {
+public class SmokedCheese extends Ingredient {
 
-    public CreamSauce() {
-        this.setCategory(CategoryOfIngredient.SAUCE);
+    public SmokedCheese() {
+        this.setCategory(CategoryOfIngredient.CHEESE);
     }
 
     @Override
     public String getClassName(){
-        return "Sos śmietanowy";
+        return "Ser Wędzony";
     }
 }

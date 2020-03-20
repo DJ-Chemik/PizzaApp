@@ -1,7 +1,5 @@
 package pl.chemik.PizzaApp.objects.ingredients;
 
-import pl.chemik.PizzaApp.objects.categoriesOfIngredients.CategoryOfIngredient;
-
 public abstract class Ingredient {
 
     private int price;
