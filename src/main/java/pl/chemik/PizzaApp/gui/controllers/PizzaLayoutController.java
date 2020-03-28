@@ -2,11 +2,15 @@ package pl.chemik.PizzaApp.gui.controllers;
 
 import com.vaadin.flow.component.grid.Grid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import pl.chemik.PizzaApp.api.WebServiceApi;
+import pl.chemik.PizzaApp.gui.PizzasLayout;
+import pl.chemik.PizzaApp.gui.VaadinView;
+import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,16 +21,55 @@ public class PizzaLayoutController {
     private int actualNumberOfSize;
     private int actualSizeOfPizza;
     private int numberOfPeople;
-    private List<Pizza> pizzas;
+    private List<Pizza> pizzasToDisplay;
+    private List<Pizza> allPizzas;
 
 
     @Autowired
     public PizzaLayoutController(WebServiceApi webServiceApi) {
         this.webServiceApi = webServiceApi;
-        this.pizzas = webServiceApi.getPizzas();
+        this.allPizzas = webServiceApi.getPizzas();
+        this.pizzasToDisplay = new ArrayList<>(allPizzas);
         listOfSizes = webServiceApi.getOnePizzaById(1).getSizesOfPizza();
         actualNumberOfSize = 0;
         numberOfPeople = 1;
+    }
+
+    public void displayOnlyPizzasWith(List<Ingredient> selectedIngredients){
+        pizzasToDisplay.clear();
+        pizzasToDisplay.addAll(allPizzas);
+        if (selectedIngredients.isEmpty()){
+            resetListOfPizzas();
+        }else{
+            for (Pizza pizza : allPizzas){
+                if (!checkIsPizzaReadyToDisplay(selectedIngredients, pizza)){
+                    pizzasToDisplay.remove(pizza);
+                }
+            }
+        }
+
+    }
+
+    private boolean checkIsPizzaReadyToDisplay(List<Ingredient> selectedIngredients, Pizza pizza) {
+        for (Ingredient selectedIngredient : selectedIngredients){
+            if (compareIngredients(pizza.getIngredients().getIngredients(), selectedIngredient)==false){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean compareIngredients(List<Ingredient> ingredientList, Ingredient oneIngredient){
+        for (Ingredient i : ingredientList){
+            if (oneIngredient.equals(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void resetListOfPizzas(){
+        this.pizzasToDisplay.addAll(allPizzas);
     }
 
     public float calculateCostForPerson(Grid grid){
@@ -72,7 +115,7 @@ public class PizzaLayoutController {
     }
 
     public List<Pizza> getPizzas() {
-        return pizzas;
+        return pizzasToDisplay;
     }
 
     public void incrementNumberOfPeople() {

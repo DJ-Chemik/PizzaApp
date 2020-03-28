@@ -20,7 +20,7 @@ public class VaadinView extends VerticalLayout {
     @Autowired
     public VaadinView(PizzaLayoutController pizzaLayoutController, IngredientsLayoutController ingredientsLayoutController) {
         this.pizzasLayout = new PizzasLayout(pizzaLayoutController);
-        this.ingredientsLayout = new IngredientsLayout(ingredientsLayoutController);
+        this.ingredientsLayout = new IngredientsLayout(ingredientsLayoutController, pizzasLayout);
 
         add(pizzasLayout);
         add(ingredientsLayout);

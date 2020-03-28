@@ -21,7 +21,8 @@ public class PizzasLayout extends VerticalLayout {
     public PizzasLayout(PizzaLayoutController pizzaLayoutController) {
         this.controller = pizzaLayoutController;
 
-        grid = addGrid();
+        grid = newGrid();
+        add(grid);
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         Label labelPizzasCount = new Label("Ilość różnych połówek pizzy: 0");
@@ -71,13 +72,16 @@ public class PizzasLayout extends VerticalLayout {
         labelTotalCostForPerson.setText("Koszt na osobę: " + controller.calculateCostForPerson(grid));
     }
 
-    private Grid<Pizza> addGrid() {
+    private Grid<Pizza> newGrid() {
         Grid<Pizza> grid = new Grid<>();
         grid.setSelectionMode(Grid.SelectionMode.MULTI);
         grid.setItems(controller.getPizzas());
         addColumnsToGrid(grid);
-        add(grid);
         return grid;
+    }
+
+    public void actualizeGridWithPizzas() {
+        grid.setItems(controller.getPizzas());
     }
 
     private void addColumnsToGrid(Grid<Pizza> grid) {

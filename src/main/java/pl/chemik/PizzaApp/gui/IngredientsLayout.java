@@ -5,20 +5,42 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.chemik.PizzaApp.gui.controllers.IngredientsLayoutController;
+import pl.chemik.PizzaApp.gui.controllers.PizzaLayoutController;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
+import pl.chemik.PizzaApp.objects.pizzas.Pizza;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredientsLayout extends HorizontalLayout {
 
 
     private IngredientsLayoutController controller;
+    private List<Checkbox> checkboxesCheeses;
+    private List<Checkbox> checkboxesFruits;
+    private List<Checkbox> checkboxesMeat;
+    private List<Checkbox> checkboxesOthers;
+    private List<Checkbox> checkboxesSauces;
+    private List<Checkbox> checkboxesSeafoods;
+    private List<Checkbox> checkboxesVegetables;
+    private PizzasLayout pizzasLayout;
 
     @Autowired
-    public IngredientsLayout(IngredientsLayoutController ingredientsLayoutController) {
+    public IngredientsLayout(IngredientsLayoutController ingredientsLayoutController, PizzasLayout pizzasLayout) {
         this.controller = ingredientsLayoutController;
-        initializeBoxes();
+        this.pizzasLayout = pizzasLayout;
+        checkboxesCheeses = new ArrayList<>();
+        checkboxesFruits = new ArrayList<>();
+        checkboxesMeat = new ArrayList<>();
+        checkboxesOthers = new ArrayList<>();
+        checkboxesSauces = new ArrayList<>();
+        checkboxesSeafoods = new ArrayList<>();
+        checkboxesVegetables = new ArrayList<>();
+        initializeLayout();
+
     }
 
-    private void initializeBoxes() {
+    private void initializeLayout() {
         VerticalLayout boxOfcheeses = new VerticalLayout();
         VerticalLayout boxOfFruits = new VerticalLayout();
         VerticalLayout boxOfMeat = new VerticalLayout();
@@ -30,34 +52,117 @@ public class IngredientsLayout extends HorizontalLayout {
         VerticalLayout subboxOFVegetables2 = new VerticalLayout();
         boxOfVegetables.add(subboxOFVegetables1);
         boxOfVegetables.add(subboxOFVegetables2);
+
         for (Ingredient i : controller.getIngredientsManager().getCheeses()) {
-            boxOfcheeses.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+
+            });
+            checkboxesCheeses.add(tmp);
+            boxOfcheeses.add(tmp);
         }
         for (Ingredient i : controller.getIngredientsManager().getMeat()) {
-            boxOfMeat.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
+            checkboxesMeat.add(tmp);
+            boxOfMeat.add(tmp);
         }
         for (Ingredient i : controller.getIngredientsManager().getFruits()) {
-            boxOfFruits.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
+            checkboxesFruits.add(tmp);
+            boxOfFruits.add(tmp);
         }
         for (Ingredient i : controller.getIngredientsManager().getSauces()) {
-            boxOfSauces.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
+            checkboxesSauces.add(tmp);
+            boxOfSauces.add(tmp);
         }
         for (Ingredient i : controller.getIngredientsManager().getOthers()) {
-            boxOfOthers.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
+            checkboxesOthers.add(tmp);
+            boxOfOthers.add(tmp);
         }
         for (Ingredient i : controller.getIngredientsManager().getSeafoods()) {
-            boxOfSeafoods.add(new Checkbox(i.getClassName()));
+            Checkbox tmp = new Checkbox(i.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(i);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
+            checkboxesSeafoods.add(tmp);
+            boxOfSeafoods.add(tmp);
         }
         int size = controller.getIngredientsManager().getVegetables().size();
         for (int i = 0; i < size; i++) {
+            Ingredient ingredient = controller.getIngredientsManager().getVegetables().get(i);
+            Checkbox tmp = new Checkbox(ingredient.getClassName());
+            tmp.addClickListener(e -> {
+                if (tmp.getValue()){
+                    controller.clickCheckBoxTrue(ingredient);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }else{
+                    controller.clickCheckBoxFalse(ingredient);
+                    pizzasLayout.actualizeGridWithPizzas();
+                }
+            });
             if (i <= size / 2) {
-                subboxOFVegetables1.add(new Checkbox(controller.getIngredientsManager().getVegetables().get(i).getClassName()));
-                continue;
+                subboxOFVegetables1.add(tmp);
             }
-            subboxOFVegetables2.add(new Checkbox(controller.getIngredientsManager().getVegetables().get(i).getClassName()));
+            if (i > size / 2) {
+                subboxOFVegetables2.add(tmp);
+            }
+            checkboxesVegetables.add(tmp);
         }
+
         add(boxOfcheeses);
         add(boxOfSauces);
+        add(boxOfMeat);
         add(boxOfVegetables);
         add(boxOfFruits);
         add(boxOfSeafoods);
