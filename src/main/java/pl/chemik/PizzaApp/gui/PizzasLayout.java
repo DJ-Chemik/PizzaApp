@@ -6,9 +6,6 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.chemik.PizzaApp.api.WebServiceApi;
 import pl.chemik.PizzaApp.gui.controllers.PizzaLayoutController;
 import pl.chemik.PizzaApp.objects.pizzas.Pizza;
 
@@ -27,7 +24,7 @@ public class PizzasLayout extends VerticalLayout {
         grid = addGrid();
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
-        Label labelPizzasCount = new Label("Ilość wybranych pizz: 0");
+        Label labelPizzasCount = new Label("Ilość różnych połówek pizzy: 0");
         Label labelPeopleCount = new Label("Ilość osób: " + controller.getNumberOfPeople());
         Button buttonPeopleCountMinus = new Button("-");
         Button buttonPeopleCountPlus = new Button("+");
@@ -47,7 +44,7 @@ public class PizzasLayout extends VerticalLayout {
             } else {
                 labelTotalCostForPerson.setVisible(false);
             }
-            labelPizzasCount.setText("Ilość wybranych pizz: " + numberOfSelectedItems);
+            labelPizzasCount.setText("Ilość różnych połówek pizzy: " + numberOfSelectedItems);
         });
 
         buttonPeopleCountPlus.addClickListener(e -> {

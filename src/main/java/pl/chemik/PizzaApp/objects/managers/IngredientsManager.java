@@ -1,7 +1,5 @@
 package pl.chemik.PizzaApp.objects.managers;
 
-import com.vaadin.flow.component.grid.Grid;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.chemik.PizzaApp.objects.ingredients.Ingredient;
@@ -17,10 +15,8 @@ import pl.chemik.PizzaApp.objects.ingredients.seafoods.Clams;
 import pl.chemik.PizzaApp.objects.ingredients.seafoods.Shrimp;
 import pl.chemik.PizzaApp.objects.ingredients.seafoods.Tuna;
 import pl.chemik.PizzaApp.objects.ingredients.vegetables.*;
-import sun.security.provider.ConfigFile;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
