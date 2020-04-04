@@ -3,6 +3,8 @@ package pl.chemik.PizzaApp.gui.controllers;
 import com.vaadin.flow.component.grid.Grid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 import pl.chemik.PizzaApp.api.WebServiceApi;
 import pl.chemik.PizzaApp.gui.PizzasLayout;
 import pl.chemik.PizzaApp.gui.VaadinView;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@SessionScope
 public class PizzaLayoutController {
 
     private WebServiceApi webServiceApi;
@@ -35,14 +38,12 @@ public class PizzaLayoutController {
         numberOfPeople = 1;
     }
 
-    public void displayOnlyPizzasWith(List<Ingredient> selectedIngredients){
+    public void displayOnlyPizzasWith(List<Ingredient> selectedIngredients) {
         pizzasToDisplay.clear();
         pizzasToDisplay.addAll(allPizzas);
-        if (selectedIngredients.isEmpty()){
-            resetListOfPizzas();
-        }else{
-            for (Pizza pizza : allPizzas){
-                if (!checkIsPizzaReadyToDisplay(selectedIngredients, pizza)){
+        if (!selectedIngredients.isEmpty()) {
+            for (Pizza pizza : allPizzas) {
+                if (!checkIsPizzaReadyToDisplay(selectedIngredients, pizza)) {
                     pizzasToDisplay.remove(pizza);
                 }
             }
@@ -51,34 +52,34 @@ public class PizzaLayoutController {
     }
 
     private boolean checkIsPizzaReadyToDisplay(List<Ingredient> selectedIngredients, Pizza pizza) {
-        for (Ingredient selectedIngredient : selectedIngredients){
-            if (compareIngredients(pizza.getIngredients().getIngredients(), selectedIngredient)==false){
+        for (Ingredient selectedIngredient : selectedIngredients) {
+            if (compareIngredients(pizza.getIngredients().getIngredients(), selectedIngredient) == false) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean compareIngredients(List<Ingredient> ingredientList, Ingredient oneIngredient){
-        for (Ingredient i : ingredientList){
-            if (oneIngredient.equals(i)){
+    private boolean compareIngredients(List<Ingredient> ingredientList, Ingredient oneIngredient) {
+        for (Ingredient i : ingredientList) {
+            if (oneIngredient.equals(i)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void resetListOfPizzas(){
+    public void resetListOfPizzas() {
         this.pizzasToDisplay.addAll(allPizzas);
     }
 
-    public float calculateCostForPerson(Grid grid){
+    public float calculateCostForPerson(Grid grid) {
         float totalCost = 0f;
-        for (Object o: grid.getSelectionModel().getSelectedItems()) {
-            totalCost+= ((Pizza)o).getTableOfCostsAndSizes().get(getActualSizeOfPizza());
+        for (Object o : grid.getSelectionModel().getSelectedItems()) {
+            totalCost += ((Pizza) o).getTableOfCostsAndSizes().get(getActualSizeOfPizza());
         }
-        totalCost/=grid.getSelectionModel().getSelectedItems().size();
-        totalCost/=getNumberOfPeople();
+        totalCost /= grid.getSelectionModel().getSelectedItems().size();
+        totalCost /= getNumberOfPeople();
         return totalCost;
     }
 
